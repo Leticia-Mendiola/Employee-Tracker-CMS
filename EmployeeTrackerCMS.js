@@ -25,10 +25,11 @@ const runSearch = () => {
       type: 'list',
       message: 'What would you like to do?',
       choices: [
-        'Find songs by artist',
-        'Find all artists who appear more than once',
-        'Find data within a specific range',
-        'Search for a specific song',
+        'View All Employees',
+        'View All Employees By Department',
+        'Add Employee',
+        'Update Employee Info',
+        'Delete Employee',
         'exit',
       ],
     })
