@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   user: 'root',
   // Your password
   password: 'basicpassword509',
-  database: 'top_songsDB',
+  database: 'Employee_SchemaDB',
 });
 
 connection.connect((err) => {
