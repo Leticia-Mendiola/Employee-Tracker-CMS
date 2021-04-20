@@ -177,8 +177,8 @@ const deleteEmployee = () => {
       connection.query(
         'DELETE FROM employee WHERE ?',
         {
-          firstName: `${answer.firstName}`,
-          lastName: `${answer.lastName}`
+          first_name: `${answer.firstName}`,
+          last_name: `${answer.lastName}`
         },
         (err, res) => {
           if (err) throw err;
