@@ -71,7 +71,7 @@ const viewAll = () => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
-    console.log("__________________________________________________________________")
+    console.log("____________________________________________________________________________________________________________________________________");
     initPrompt();
   });
 };
@@ -81,7 +81,8 @@ const viewAllDept = () => {
     'SELECT * FROM top5000 ORDER BY artist LIMIT 50';
   connection.query(query, (err, res) => {
     if (err) throw err;
-    res.forEach(({ artist }) => console.log(artist));
+    console.table(res);
+    console.log("____________________________________________________________________________________________________________________________________");
     initPrompt();
   });
 };
