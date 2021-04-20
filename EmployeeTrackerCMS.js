@@ -15,10 +15,10 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) throw err;
-  runSearch();
+  initPrompt();
 });
 
-const runSearch = () => {
+const initPrompt = () => {
   inquirer
     .prompt({
       name: 'action',
