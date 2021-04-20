@@ -202,21 +202,17 @@ const deleteEmployee = () => {
       message: 'What song would you like to look for?',
     })
     .then((answer) => {
-      console.log(`You searched for "${answer.song}"`);
+      console.log('Deleting all strawberry icecream...\n');
       connection.query(
-        'SELECT * FROM top5000 WHERE ?',
-        { song: answer.song },
+        'DELETE FROM products WHERE ?',
+        {
+          flavor: 'strawberry',
+        },
         (err, res) => {
           if (err) throw err;
-          if (res[0]) {
-            console.log(
-              `Position: ${res[0].position} || Song: ${res[0].song} || Artist: ${res[0].artist} || Year: ${res[0].year}`
-            );
-            runSearch();
-          } else {
-            console.error('Song not found :(\n');
-            runSearch();
-          }
+          console.log(`${res.affectedRows} products deleted!\n`);
+          // Call readProducts AFTER the DELETE completes
+          readProducts();
         }
       );
     });
