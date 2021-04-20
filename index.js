@@ -98,16 +98,16 @@ const addEmployee = () => {
     },
     {
       name: 'role',
-      type: 'list',
-      message: 'New Employee Role?',
+      type: 'rawlist',
+      message: 'Select the number corresponding to the new employees role from the list below:\n1)Sales Lead\n2)Salesperson\n3)Lead Engineer\n4)Software Engineer\n5)Accountant\n6)Legal Team Lead\n7)Lawyer',
       choices: [
-        'Sales Lead',
-        'Salesperson',
-        'Lead Engineer',
-        'Software Engineer',
-        'Accountant',
-        'Legal Team Lead',
-        'Lawyer',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
       ],
     }
   ])
@@ -117,7 +117,7 @@ const addEmployee = () => {
       {
         first_name: answer.firstName,
         last_name: answer.lastName,
-        emp_role: answer.role,
+        role_id: answer.role,
       },
       (err) => {
         if (err) throw err;
