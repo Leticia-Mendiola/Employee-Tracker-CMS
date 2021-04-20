@@ -21,3 +21,7 @@ CREATE TABLE department (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30)
 );
+
+SELECT * FROM employee;
+SELECT * FROM emp_role;
+SELECT * FROM department;
