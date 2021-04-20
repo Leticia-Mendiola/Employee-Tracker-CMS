@@ -82,49 +82,54 @@ const viewAllDept = () => {
   connection.query(query, (err, res) => {
     if (err) throw err;
     res.forEach(({ artist }) => console.log(artist));
-    runSearch();
+    initPrompt();
   });
 };
 
 const addEmployee = () => {
   inquirer
-    .prompt([
-      {
-        name: 'start',
-        type: 'input',
-        message: 'Enter starting position: ',
-        validate(value) {
-          if (isNaN(value) === false) {
-            return true;
-          }
-          return false;
-        },
+  .prompt([
+    {
+      name: 'item',
+      type: 'input',
+      message: 'What is the item you would like to submit?',
+    },
+    {
+      name: 'category',
+      type: 'input',
+      message: 'What category would you like to place your auction in?',
+    },
+    {
+      name: 'startingBid',
+      type: 'input',
+      message: 'What would you like your starting bid to be?',
+      validate(value) {
+        if (isNaN(value) === false) {
+          return true;
+        }
+        return false;
       },
+    },
+  ])
+  .then((answer) => {
+    // when finished prompting, insert a new item into the db with that info
+    connection.query(
+      'INSERT INTO auctions SET ?',
+      // QUESTION: What does the || 0 do?
       {
-        name: 'end',
-        type: 'input',
-        message: 'Enter ending position: ',
-        validate(value) {
-          if (isNaN(value) === false) {
-            return true;
-          }
-          return false;
-        },
+        item_name: answer.item,
+        category: answer.category,
+        starting_bid: answer.startingBid || 0,
+        highest_bid: answer.startingBid || 0,
       },
-    ])
-    .then((answer) => {
-      const query =
-        'SELECT position,song,artist,year FROM top5000 WHERE position BETWEEN ? AND ?';
-      connection.query(query, [answer.start, answer.end], (err, res) => {
+      (err) => {
         if (err) throw err;
-        res.forEach(({ position, song, artist, year }) =>
-          console.log(
-            `Position: ${position} || Song: ${song} || Artist: ${artist} || Year: ${year}`
-          )
-        );
-        runSearch();
-      });
-    });
+        console.log('Your auction was created successfully!');
+        // re-prompt the user for if they want to bid or post
+        start();
+      }
+    );
+  });
 };
 
 const updateEmployee = () => {
