@@ -35,19 +35,23 @@ const runSearch = () => {
     })
     .then((answer) => {
       switch (answer.action) {
-        case 'Find songs by artist':
+        case 'View All Employees':
           artistSearch();
           break;
 
-        case 'Find all artists who appear more than once':
+        case 'View All Employees By Department':
           multiSearch();
           break;
 
-        case 'Find data within a specific range':
+        case 'Add Employee':
           rangeSearch();
           break;
 
-        case 'Search for a specific song':
+        case 'Update Employee Info':
+          songSearch();
+          break;
+
+        case 'Delete Employee':
           songSearch();
           break;
 
