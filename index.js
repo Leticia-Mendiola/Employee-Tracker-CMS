@@ -78,7 +78,7 @@ const viewAll = () => {
 
 const viewAllDept = () => {
   const query =
-    'SELECT * FROM top5000 GROUP BY artist LIMIT 50';
+    'SELECT * FROM top5000 ORDER BY artist LIMIT 50';
   connection.query(query, (err, res) => {
     if (err) throw err;
     res.forEach(({ artist }) => console.log(artist));
