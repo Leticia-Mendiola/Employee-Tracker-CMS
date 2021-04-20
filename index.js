@@ -162,7 +162,7 @@ const updateEmployee = () => {
 
 const deleteEmployee = () => {
   inquirer
-    .prompt({
+    .prompt([{
       name: 'firstName',
       type: 'input',
       message: 'First Name of Employee To Remove?',
@@ -171,7 +171,7 @@ const deleteEmployee = () => {
       name: 'lastName',
       type: 'input',
       message: 'Last Name?',
-    })
+    }])
     .then((answer) => {
       console.log(`Deleting ${answer.firstName} ${answer.lastName}...\n`);
       connection.query(
