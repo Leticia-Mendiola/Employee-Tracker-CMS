@@ -3,14 +3,14 @@ CREATE DATABASE employee_trackerDB;
 
 USE employee_trackerDB;
 
-CREATE TABLE (
+CREATE TABLE employee (
 
 );
 
-CREATE TABLE (
+CREATE TABLE role (
 
 );
 
-CREATE TABLE (
+CREATE TABLE department (
 
 );
