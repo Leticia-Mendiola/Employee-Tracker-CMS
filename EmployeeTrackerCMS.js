@@ -36,23 +36,23 @@ const initPrompt = () => {
     .then((answer) => {
       switch (answer.action) {
         case 'View All Employees':
-          artistSearch();
+          viewAll();
           break;
 
         case 'View All Employees By Department':
-          multiSearch();
+          viewAllDept();
           break;
 
         case 'Add Employee':
-          rangeSearch();
+          addEmployee();
           break;
 
         case 'Update Employee Info':
-          songSearch();
+          updateEmployee();
           break;
 
         case 'Delete Employee':
-          songSearch();
+          deleteEmployee();
           break;
 
         case 'Exit':
@@ -66,7 +66,7 @@ const initPrompt = () => {
     });
 };
 
-const artistSearch = () => {
+const viewAll = () => {
   inquirer
     .prompt({
       name: 'artist',
@@ -87,7 +87,7 @@ const artistSearch = () => {
     });
 };
 
-const multiSearch = () => {
+const viewAllDept = () => {
   const query =
     'SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1';
   connection.query(query, (err, res) => {
@@ -97,7 +97,7 @@ const multiSearch = () => {
   });
 };
 
-const rangeSearch = () => {
+const addEmployee = () => {
   inquirer
     .prompt([
       {
@@ -138,7 +138,35 @@ const rangeSearch = () => {
     });
 };
 
-const songSearch = () => {
+const updateEmployee = () => {
+  inquirer
+    .prompt({
+      name: 'song',
+      type: 'input',
+      message: 'What song would you like to look for?',
+    })
+    .then((answer) => {
+      console.log(`You searched for "${answer.song}"`);
+      connection.query(
+        'SELECT * FROM top5000 WHERE ?',
+        { song: answer.song },
+        (err, res) => {
+          if (err) throw err;
+          if (res[0]) {
+            console.log(
+              `Position: ${res[0].position} || Song: ${res[0].song} || Artist: ${res[0].artist} || Year: ${res[0].year}`
+            );
+            runSearch();
+          } else {
+            console.error('Song not found :(\n');
+            runSearch();
+          }
+        }
+      );
+    });
+};
+
+const deleteEmployee = () => {
   inquirer
     .prompt({
       name: 'song',
