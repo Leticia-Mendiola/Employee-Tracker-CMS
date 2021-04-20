@@ -64,7 +64,7 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM employee INNER JOIN emp_role ON employee.role_id = emp_role.id', (err, res) => {
+  connection.query('SELECT * FROM employee LEFT JOIN emp_role ON employee.role_id = emp_role.id LEFT JOIN department ON emp_role.department_id = department.id', (err, res) => {
     if (err) throw err;
     console.table(res);
     console.log("____________________________________________________________________________________________________________________________________");
