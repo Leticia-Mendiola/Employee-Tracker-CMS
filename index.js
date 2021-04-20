@@ -30,7 +30,7 @@ const initPrompt = () => {
         'Add Employee',
         'Update Employee Info',
         'Delete Employee',
-        'exit',
+        'Exit',
       ],
     })
     .then((answer) => {
@@ -71,6 +71,7 @@ const viewAll = () => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
+    initPrompt();
   });
 };
 
