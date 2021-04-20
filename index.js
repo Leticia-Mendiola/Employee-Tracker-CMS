@@ -72,8 +72,8 @@ const viewAll = () => {
     // Log all results of the SELECT statement
     console.table(res);
     console.log("____________________________________________________________________________________________________________________________________");
+    initPrompt();
   });
-  initPrompt();
 };
 
 const viewAllDept = () => {
@@ -83,8 +83,8 @@ const viewAllDept = () => {
     if (err) throw err;
     console.table(res);
     console.log("____________________________________________________________________________________________________________________________________");
+    initPrompt();
   });
-  initPrompt();
 };
 
 const addEmployee = () => {
