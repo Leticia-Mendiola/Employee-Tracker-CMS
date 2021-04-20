@@ -182,7 +182,7 @@ const deleteEmployee = () => {
         },
         (err, res) => {
           if (err) throw err;
-          console.log(`${res.affectedRows} products deleted!\n`);
+          console.log(`${res.affectedRows} deleted!\n`);
           initPromt();
         }
       );
