@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   user: 'root',
   // Your password
   password: 'basicpassword509',
-  database: 'Employee_SchemaDB',
+  database: 'top_songsdb',
 });
 
 connection.connect((err) => {
@@ -67,7 +67,7 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM products', (err, res) => {
+  connection.query('SELECT * FROM top5000', (err, res) => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
