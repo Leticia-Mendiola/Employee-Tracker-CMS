@@ -7,7 +7,7 @@ CREATE TABLE employee (
 
 );
 
-CREATE TABLE role (
+CREATE TABLE emp_role (
 
 );
 

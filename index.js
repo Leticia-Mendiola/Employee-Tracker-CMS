@@ -121,7 +121,7 @@ const addEmployee = () => {
       {
         first_name: answer.firstName,
         last_name: answer.lastName,
-        role: answer.role,
+        emp_role: answer.role,
       },
       (err) => {
         if (err) throw err;
