@@ -67,9 +67,8 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM employee INNER JOIN', (err, res) => {
+  connection.query('SELECT * FROM employee', (err, res) => {
     if (err) throw err;
-    // Log all results of the SELECT statement
     console.table(res);
     console.log("____________________________________________________________________________________________________________________________________");
     initPrompt();
