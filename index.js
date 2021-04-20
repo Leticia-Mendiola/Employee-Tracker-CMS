@@ -74,7 +74,7 @@ const viewAll = () => {
 
 const viewAllDept = () => {
   const query =
-    'SELECT * FROM employee ORDER BY department';
+    'SELECT * FROM employee LEFT JOIN emp_role ON employee.role_id = emp_role.id LEFT JOIN department ON emp_role.department_id = department.id ORDER BY department_name';
   connection.query(query, (err, res) => {
     if (err) throw err;
     console.table(res);
