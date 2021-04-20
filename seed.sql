@@ -11,7 +11,10 @@ CREATE TABLE employee (
 );
 
 CREATE TABLE emp_role (
-
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30),
+    salary DECIMAL,
+    department_id INT FOREIGN KEY,
 );
 
 CREATE TABLE department (
