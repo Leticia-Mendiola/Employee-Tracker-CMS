@@ -91,26 +91,16 @@ const addEmployee = () => {
   inquirer
   .prompt([
     {
-      name: 'item',
+      name: 'firstName',
       type: 'input',
-      message: 'What is the item you would like to submit?',
+      message: 'New Employee First Name?',
     },
     {
-      name: 'category',
+      name: 'lastName',
       type: 'input',
-      message: 'What category would you like to place your auction in?',
+      message: 'New Employee Last Name?',
     },
-    {
-      name: 'startingBid',
-      type: 'input',
-      message: 'What would you like your starting bid to be?',
-      validate(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        return false;
-      },
-    },
+    
   ])
   .then((answer) => {
     // when finished prompting, insert a new item into the db with that info
