@@ -67,17 +67,18 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM top5000 LIMIT 10', (err, res) => {
+  connection.query('SELECT * FROM top5000 LIMIT 50', (err, res) => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
+    console.log("__________________________________________________________________")
     initPrompt();
   });
 };
 
 const viewAllDept = () => {
   const query =
-    'SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1';
+    'SELECT * FROM top5000 GROUP BY artist LIMIT 50';
   connection.query(query, (err, res) => {
     if (err) throw err;
     res.forEach(({ artist }) => console.log(artist));
