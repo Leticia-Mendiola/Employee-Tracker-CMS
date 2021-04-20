@@ -116,21 +116,16 @@ const addEmployee = () => {
     }
   ])
   .then((answer) => {
-    // when finished prompting, insert a new item into the db with that info
     connection.query(
-      'INSERT INTO auctions SET ?',
-      // QUESTION: What does the || 0 do?
+      'INSERT INTO employee SET ?',
       {
-        item_name: answer.item,
-        category: answer.category,
-        starting_bid: answer.startingBid || 0,
-        highest_bid: answer.startingBid || 0,
+        first_name: answer.firstName,
+        last_name: answer.lastName,
+        role: answer.role,
       },
       (err) => {
         if (err) throw err;
-        console.log('Your auction was created successfully!');
-        // re-prompt the user for if they want to bid or post
-        start();
+        console.log('New Employee Added!');
       }
     );
   });
