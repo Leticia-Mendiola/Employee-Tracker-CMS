@@ -67,7 +67,7 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM employee', (err, res) => {
+  connection.query('SELECT * FROM employee INNER JOIN', (err, res) => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
@@ -126,13 +126,14 @@ const addEmployee = () => {
       (err) => {
         if (err) throw err;
         console.log('New Employee Added!');
+        initPrompt();
       }
     );
   });
 };
 
 const updateEmployee = () => {
-  connection.query('SELECT * FROM auctions', (err, results) => {
+  connection.query('SELECT * FROM employee', (err, results) => {
     if (err) throw err;
     // once you have the items, prompt the user for which they'd like to bid on
     inquirer
@@ -142,17 +143,12 @@ const updateEmployee = () => {
           type: 'rawlist',
           choices() {
             const choiceArray = [];
-            results.forEach(({ item_name }) => {
-              choiceArray.push(item_name);
+            results.forEach(({ first_name,last_name }) => {
+              choiceArray.push(first_name,last_name);
             });
             return choiceArray;
           },
-          message: 'What auction would you like to place a bid in?',
-        },
-        {
-          name: 'bid',
-          type: 'input',
-          message: 'How much would you like to bid?',
+          message: 'Which Employee Would You Like To Update?',
         },
       ])
       .then((answer) => {
@@ -162,32 +158,8 @@ const updateEmployee = () => {
           if (item.item_name === answer.choice) {
             chosenItem = item;
           }
+          initPrompt();
         });
-
-        // determine if bid was high enough
-        if (chosenItem.highest_bid < parseInt(answer.bid)) {
-          // bid was high enough, so update db, let the user know, and start over
-          connection.query(
-            'UPDATE auctions SET ? WHERE ?',
-            [
-              {
-                highest_bid: answer.bid,
-              },
-              {
-                id: chosenItem.id,
-              },
-            ],
-            (error) => {
-              if (error) throw err;
-              console.log('Bid placed successfully!');
-              start();
-            }
-          );
-        } else {
-          // bid wasn't high enough, so apologize and start over
-          console.log('Your bid was too low. Try again...');
-          start();
-        }
       });
   });
 };
@@ -195,22 +167,27 @@ const updateEmployee = () => {
 const deleteEmployee = () => {
   inquirer
     .prompt({
-      name: 'song',
+      name: 'firstName',
       type: 'input',
-      message: 'What song would you like to look for?',
+      message: 'First Name of Employee To Remove?',
+    },
+    {
+      name: 'lastName',
+      type: 'input',
+      message: 'Last Name?',
     })
     .then((answer) => {
-      console.log('Deleting all strawberry icecream...\n');
+      console.log(`Deleting ${answer.firstName} ${answer.lastName}...\n`);
       connection.query(
-        'DELETE FROM products WHERE ?',
+        'DELETE FROM employee WHERE ?',
         {
-          flavor: 'strawberry',
+          firstName: `${answer.firstName}`,
+          lastName: `${answer.lastName}`
         },
         (err, res) => {
           if (err) throw err;
           console.log(`${res.affectedRows} products deleted!\n`);
-          // Call readProducts AFTER the DELETE completes
-          readProducts();
+          initPromt();
         }
       );
     });
