@@ -67,7 +67,7 @@ const initPrompt = () => {
 };
 
 const viewAll = () => {
-  connection.query('SELECT * FROM top5000', (err, res) => {
+  connection.query('SELECT * FROM top5000 LIMIT 10', (err, res) => {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.table(res);
