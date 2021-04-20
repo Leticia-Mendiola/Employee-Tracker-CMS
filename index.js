@@ -100,7 +100,20 @@ const addEmployee = () => {
       type: 'input',
       message: 'New Employee Last Name?',
     },
-    
+    {
+      name: 'role',
+      type: 'list',
+      message: 'New Employee Role?',
+      choices: [
+        'Sales Lead',
+        'Salesperson',
+        'Lead Engineer',
+        'Software Engineer',
+        'Accountant',
+        'Legal Team Lead',
+        'Lawyer',
+      ],
+    }
   ])
   .then((answer) => {
     // when finished prompting, insert a new item into the db with that info
