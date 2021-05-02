@@ -131,7 +131,6 @@ const addEmployee = () => {
 const updateEmployee = () => {
   connection.query('SELECT * FROM employee', (err, results) => {
     if (err) throw err;
-    // once you have the items, prompt the user for which they'd like to bid on
     inquirer
       .prompt([
         {
@@ -148,7 +147,6 @@ const updateEmployee = () => {
         },
       ])
       .then((answer) => {
-        // get the information of the chosen item
         let chosenItem;
         results.forEach((item) => {
           if (item.item_name === answer.choice) {
@@ -163,22 +161,16 @@ const updateEmployee = () => {
 const deleteEmployee = () => {
   inquirer
     .prompt([{
-      name: 'firstName',
+      name: 'ID',
       type: 'input',
-      message: 'First Name of Employee To Remove?',
-    },
-    {
-      name: 'lastName',
-      type: 'input',
-      message: 'Last Name?',
+      message: 'ID of Employee To Remove?',
     }])
     .then((answer) => {
-      console.log(`Deleting ${answer.firstName} ${answer.lastName}...\n`);
+      console.log(`Deleting...\n`);
       connection.query(
         'DELETE FROM employee WHERE ?',
         {
-          first_name: `${answer.firstName}`,
-          last_name: `${answer.lastName}`
+          id: `${answer.ID}`
         },
         (err, res) => {
           if (err) throw err;
